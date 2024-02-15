@@ -1,7 +1,7 @@
-name: 'Push Docker image to ECR'
+name: "Push Docker image to ECR"
 
 on: [workflow_dispatch]
-    
+
 jobs:
   upload:
     runs-on: "ubuntu-22.04"
@@ -13,7 +13,6 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ secrets.aws_account_id }}:role/{{ secrets.aws_role_name }}
           aws-region: ${{ secrets.aws_region }}
-
 
       - name: Prepare ECR repo name
         shell: bash
