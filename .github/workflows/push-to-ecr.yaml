@@ -18,7 +18,7 @@ jobs:
       - name: Prepare ECR repo name
         shell: bash
         run: |
-          echo "ECR_REPO_NAME=teamgeist-2"
+          echo "ECR_REPO_NAME=${{ secrets.ect_repo }}"
 
       - name: Login to Amazon ECR
         id: login-ecr

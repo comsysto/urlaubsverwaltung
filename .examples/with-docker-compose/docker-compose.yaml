@@ -41,7 +41,7 @@ services:
 
   postgres:
     image: postgres:15.3
-    container_name: postgres
+    container_name: postgresw
     environment:
       POSTGRES_DB: urlaubsverwaltung
       POSTGRES_USER: urlaubsverwaltung
