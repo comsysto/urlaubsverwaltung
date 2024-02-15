@@ -1,0 +1,41 @@
+name: 'Push Docker image to ECR'
+
+on: [workflow_dispatch]
+    
+jobs:
+  upload:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.aws_account_id }}:role/{{ secrets.aws_role_name }}
+          aws-region: ${{ secrets.aws_region }}
+
+
+      - name: Prepare ECR repo name
+        shell: bash
+        run: |
+          echo "ECR_REPO_NAME=teamgeist-2"
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.aws_account_id }}
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-publish
+        shell: bash
+        env:
+          ECR_REGISTRY: ${{ secrets.ecr-repo }}
+          ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
+          IMAGE_TAG: "teamgeist-2.0"
+        run: |
+          docker build . -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "IMAGE $IMAGE_TAG is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
+          echo "image_tag=$IMAGE_TAG" 
+          echo "full_image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
