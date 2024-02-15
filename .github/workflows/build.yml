@@ -1,14 +1,6 @@
 name: Build
 
 on:
-  schedule:
-    - cron: "15 0 * * *"
-  push:
-    branches:
-      - main
-      - v3.x
-      - v4.x
-  pull_request:
   workflow_dispatch:
 
 env:
