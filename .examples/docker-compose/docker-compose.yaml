@@ -29,9 +29,9 @@ services:
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_DEFAULT_PROVIDER: default
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_DEFAULT_SCOPE: openid,profile,email,roles
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_DEFAULT_AUTHORIZATION-GRANT-TYPE: authorization_code
-      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_DEFAULT_REDIRECT-URI: http://localhost:8080/login/oauth2/code/{registrationId}
-      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_DEFAULT_ISSUER-URI: http://localhost:8090/realms/urlaubsverwaltung
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://keycloak:8090/realms/urlaubsverwaltung
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_DEFAULT_REDIRECT-URI: http://${HOST_MACHINE}:8080/login/oauth2/code/{registrationId}
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_DEFAULT_ISSUER-URI: http://${HOST_MACHINE}:8090/realms/urlaubsverwaltung
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://${HOST_MACHINE}:8090/realms/urlaubsverwaltung
     depends_on:
       keycloak:
         condition: service_started
