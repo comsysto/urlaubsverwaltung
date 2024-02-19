@@ -36,7 +36,7 @@ If this FAQ does not answer your questions, feel free to
 
 Version 5.0.0 of the vacation management is available!
 
-We have made major adjustments to the database and security providers, as well as set the course for further development of the vacation management system. Therefore, there might not only be good news for everyone.
+We have made major adjustments to the database and security providers, as well as set the course for further development of the vacation management system.
 
 * No support for MariaDB and MySQL. We are completely switching to [PostgreSQL]. A migration path is already available in the [Migration-Guide-v5].
 * We have removed the security providers LDAP and Active Directory and are now offering even stronger support for OIDC.
