@@ -1,0 +1,149 @@
+{
+  "availability-zones:account=169119119606:region=eu-north-1": [
+    "eu-north-1a",
+    "eu-north-1b",
+    "eu-north-1c"
+  ],
+  "vpc-provider:account=169119119606:filter.vpc-id=vpc-00f4c4a6032328001:region=eu-north-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-00f4c4a6032328001",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "169119119606",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "teamgeist2-test-private",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0abfead8a3243c408",
+            "cidr": "10.0.128.0/17",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-0a854fdb7f7f46b57"
+          }
+        ]
+      },
+      {
+        "name": "teamgeist2-test-public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-04bb1ce74df49b6ec",
+            "cidr": "10.0.0.0/17",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-0bc55a35f3dc0cea2"
+          }
+        ]
+      }
+    ]
+  },
+  "vpc-provider:account=169119119606:filter.vpc-id=vpc-0ec01250ee0210b5c:region=eu-north-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0ec01250ee0210b5c",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "169119119606",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "teamgeist2-test-public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0b6d94a1a8f506154",
+            "cidr": "10.0.0.0/18",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-031db4d14c856aa12"
+          },
+          {
+            "subnetId": "subnet-0727202dce2908eb3",
+            "cidr": "10.0.64.0/18",
+            "availabilityZone": "eu-north-1b",
+            "routeTableId": "rtb-06338bd70b7a44061"
+          }
+        ]
+      },
+      {
+        "name": "teamgeist2-test-private",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0b86e929064893a04",
+            "cidr": "10.0.128.0/18",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-07ecfb781ae3d7584"
+          },
+          {
+            "subnetId": "subnet-00b73e1cab279e871",
+            "cidr": "10.0.192.0/18",
+            "availabilityZone": "eu-north-1b",
+            "routeTableId": "rtb-0ec1f03b5c39d2c8c"
+          }
+        ]
+      }
+    ]
+  },
+  "hosted-zone:account=169119119606:domainName=comsysto.com:region=eu-north-1": {
+    "Id": "/hostedzone/Z2XGPWV1M639TV",
+    "Name": "comsysto.com."
+  },
+  "load-balancer:account=169119119606:loadBalancerArn=arn$:aws$:elasticloadbalancing$:eu-north-1$:169119119606$:loadbalancer/app/Keyclo-teamg-Lfgif59kREzU/f7dd59848ff89c76:loadBalancerType=application:region=eu-north-1": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:eu-north-1:169119119606:loadbalancer/app/Keyclo-teamg-Lfgif59kREzU/f7dd59848ff89c76",
+    "loadBalancerCanonicalHostedZoneId": "Z23TAZ6LKFMNIO",
+    "loadBalancerDnsName": "Keyclo-teamg-Lfgif59kREzU-33065530.eu-north-1.elb.amazonaws.com",
+    "vpcId": "vpc-0ec01250ee0210b5c",
+    "securityGroupIds": [
+      "sg-0cbf03f9b4227c9f2"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "security-group:account=169119119606:region=eu-north-1:securityGroupId=sg-0cbf03f9b4227c9f2": {
+    "securityGroupId": "sg-0cbf03f9b4227c9f2",
+    "allowAllOutbound": false
+  },
+  "vpc-provider:account=169119119606:filter.isDefault=false:filter.tag:Name=VpcStack/teamgeist2-test-vpc:region=eu-north-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0ec01250ee0210b5c",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "169119119606",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "teamgeist2-test-public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0b6d94a1a8f506154",
+            "cidr": "10.0.0.0/18",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-031db4d14c856aa12"
+          },
+          {
+            "subnetId": "subnet-0727202dce2908eb3",
+            "cidr": "10.0.64.0/18",
+            "availabilityZone": "eu-north-1b",
+            "routeTableId": "rtb-06338bd70b7a44061"
+          }
+        ]
+      },
+      {
+        "name": "teamgeist2-test-private",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0b86e929064893a04",
+            "cidr": "10.0.128.0/18",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-07ecfb781ae3d7584"
+          },
+          {
+            "subnetId": "subnet-00b73e1cab279e871",
+            "cidr": "10.0.192.0/18",
+            "availabilityZone": "eu-north-1b",
+            "routeTableId": "rtb-0ec1f03b5c39d2c8c"
+          }
+        ]
+      }
+    ]
+  },
+  "security-group:account=169119119606:region=eu-north-1:securityGroupName=KeycloakStack-teamgeist2testlbSecurityGroupA955AB91-1RWAJEKNMC38W:vpcId=vpc-0ec01250ee0210b5c": {
+    "securityGroupId": "sg-07b8b0489ad74347e",
+    "allowAllOutbound": false
+  }
+}
