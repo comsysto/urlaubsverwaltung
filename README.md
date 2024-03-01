@@ -1,120 +1,113 @@
 # Urlaubsverwaltung [![Build](https://github.com/urlaubsverwaltung/urlaubsverwaltung/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/urlaubsverwaltung/urlaubsverwaltung/actions/workflows/build.yml) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=urlaubsverwaltung_urlaubsverwaltung&metric=coverage)](https://sonarcloud.io/summary/new_code?id=urlaubsverwaltung_urlaubsverwaltung) [![Docker Pulls](https://badgen.net/docker/pulls/synyx/urlaubsverwaltung?icon=docker&label=pulls)](https://hub.docker.com/r/urlaubsverwaltung/urlaubsverwaltung/) [![Crowdin](https://badges.crowdin.net/urlaubsverwaltung/localized.svg)](https://crowdin.com/project/urlaubsverwaltung)
 
-Die Urlaubsverwaltung ist eine Web-Anwendung, um *Abwesenheiten* elektronisch verwalten zu können.
+The vacation management is a web application for electronically managing *absences*.
 
-Anhand von **Urlaubsanträgen** kann ein Mitarbeiter eine Anfrage stellen, die von den jeweils berechtigten Personen genehmigt,
-abgelehnt oder storniert werden kann. Jeder Mitarbeiter kann seine **Überstunden** pflegen, um immer den Überblick
-zu behalten und falls doch mal eine Person ausfallen sollte, so kann die **Krankmeldung** direkt gepflegt werden.
+Employees can submit **vacation requests**, which can then be approved, denied, or cancelled by the respective authorized persons. Every employee can manage their **overtime** to always keep track, and should someone be unable to work, the **sick leave** can be recorded directly.
 
-Wenn du mehr Informationen und Bilder über dieses Projekt sehen möchtest dann schaue auf unserer [Landingpage] vorbei.
 
-**Version 4.x**  
-Diese Readme bezieht sich auf die 5er-Version der Urlaubsverwaltung. Wenn du Informationen zu der 4er-Version erhalten
-möchtest, dann findest du diese [im v4.x Branch](https://github.com/urlaubsverwaltung/urlaubsverwaltung/tree/v4.x).
+If you would like to see more information and images about this project, please visit our [Landing Page].
 
-* [Demo-System](#demo-system)
+**Version 4.x**
+This Readme is for version 5 of the vacation management system. If you are looking for information on version 4,
+you can find it [in the v4.x branch](https://github.com/urlaubsverwaltung/urlaubsverwaltung/tree/v4.x).
+
+* [Demo System](#demo-system)
 * [FAQ](#faq)
-* [Berechtigungen](#berechtigungen)
-* [Betrieb](#betrieb)
-  * [Konfiguration](#konfiguration)
-* [Demodaten Modus](#demodaten-modus)
-* [Entwicklung](#entwicklung)
+* [Permissions](#permissions)
+* [Operation](#operation)
+  * [Configuration](#configuration)
+* [Demo Data Mode](#demo-data-mode)
+* [Development](#development)
 
 
-## Demo-System
+## Demo System
 
-Möchtest du die Urlaubsverwaltung **ohne** eine langwierige **Registrierung** ausprobieren?  
-Dann steige über unsere [Landingpage] direkt in das [Demo-System] ein.
-
+Would you like to try out the vacation management **without** a lengthy **registration** process?  
+Then jump directly into the [Demo System] via our [Landing Page].
 
 ## FAQ
 
-Für Fragen, die bei der Benutzung der Urlaubsverwaltung aufkommen, gibt es ein [Hilfe].  
-Sollte dieser Fragenkatalog nicht weiterhelfen, kannst du gerne
-[ein neue Q&A](https://github.com/urlaubsverwaltung/urlaubsverwaltung/discussions/new?category=q-a) erstellen.
+For questions that arise while using the vacation management, there is a [Help section].  
+If this FAQ does not answer your questions, feel free to
+[create a new Q&A](https://github.com/urlaubsverwaltung/urlaubsverwaltung/discussions/new?category=q-a).
 
 
-## 🎉 Version 5.x 
+## 🎉 Version 5.x
 
-Die Version 5.0.0 der Urlaubsverwaltung ist verfügbar!
+Version 5.0.0 of the vacation management is available!
 
-Wir haben größere Anpassungen an der Datenbank und den Security-Providern vorgenommen, sowie die Weichen für die weitere Entwicklung der 
-Urlaubsverwaltung stellen. Daher gibt es für den ein oder anderen nicht nur gute Nachrichten.
+We have made major adjustments to the database and security providers, as well as set the course for further development of the vacation management system.
 
-* Keine Unterstützung für MariaDB und MySQL. Wir wechseln komplett auf [PostgreSQL]. Einen Migrationspfad ist bereits im [Migration-Guide-v5] vorhanden.
-* Wir haben die security provider LDAP und Active Directory entfernt und unterstützen dafür OIDC noch stärker.
+* No support for MariaDB and MySQL. We are completely switching to [PostgreSQL]. A migration path is already available in the [Migration-Guide-v5].
+* We have removed the security providers LDAP and Active Directory and are now offering even stronger support for OIDC.
 
-Alle Informationen zum Migrieren von 4.72.1 auf 5.0.0 findet ihr im [Migration-Guide-v5]
+All information on migrating from 4.72.1 to 5.0.0 can be found in the [Migration-Guide-v5].
 
-## Berechtigungen
 
-In der Urlaubsverwaltung gibt es aktuell folgende Arten von Berechtigungen:
+## Permissions
 
-* **inaktiv**: hat keinen Zugang mehr zur Urlaubsverwaltung (Daten des Benutzers bleiben zur Archivierung bestehen)
-* **User**: darf Urlaub für sich selbst beantragen
-* **Abteilungsleiter**: darf Urlaubsanträge für die Benutzer seiner Abteilungen einsehen, genehmigen und ablehnen
-* **Freigabe-Verantwortlicher**: ist bei der zweistufigen Genehmigung von Anträgen verantwortlich für die endgültige Freigabe
-* **Chef**: darf Urlaubsanträge aller Benutzer einsehen, genehmigen und ablehnen
-* **Office**: darf Einstellungen zur Anwendung vornehmen, Mitarbeiter verwalten, Urlaub für Mitarbeiter
-beantragen/stornieren und Krankmeldungen pflegen
+In the vacation management system, there are currently the following types of permissions:
 
-Eine aktive Person kann eine oder mehrere Rollen innehaben.
+* **inactive**: no longer has access to the vacation management system (user data remains for archival purposes)
+* **User**: can request vacation for themselves
+* **Department Head**: can view, approve, and deny vacation requests for users in their departments
+* **Release Responsible**: is responsible for the final approval in the two-stage approval process of applications
+* **Boss**: can view, approve, and deny vacation requests of all users
+* **Office**: can make application settings, manage employees, apply/cancel vacation for employees, and maintain sick leave records
+
+An active person can hold one or more roles.
+
   
 ---
   
-## Betrieb
+## Operation
 
-### Voraussetzungen
+### Prerequisites
 
 * [JDK 21](https://adoptium.net)
-* [PostgreSQL Datenbank (v15.3)](https://www.postgresql.org/)
-* [Security Provider](#security-provider-konfigurieren)
+* [PostgreSQL Database (v15.3)](https://www.postgresql.org/)
+* [Security Provider](#configure-security-provider)
 
 ### Download
 
-Die Anwendung steht als
+The application is available as a
 * [Java Archive (.jar)](https://github.com/urlaubsverwaltung/urlaubsverwaltung/releases/latest)
 * [Docker Image](https://hub.docker.com/r/urlaubsverwaltung/urlaubsverwaltung)
 
-zur Verfügung.
+#### Installation .jar Variant
 
-
-#### Installation .jar Variante
-
-* [Konfiguration Datenbank](#datenbank-konfigurieren)
-* [Konfiguration Security Provider](#security-provider-konfigurieren)
-* Lege ein Verzeichnis für die Urlaubsverwaltung an (z.B. `/opt/urlaubsverwaltung`). Kopiere die .jar-Datei dorthin.
-* Erstelle in dem Verzeichnis eine Konfigurationsdatei namens `application.properties`, welche die Konfiguration für
-die Urlaubsverwaltung enthält und die Standardwerte überschreibt.
- Die vollständigen Konfigurationsoptionen sind unter [Konfiguration](#konfiguration) dokumentiert.
+* [Configure Database](#configure-database)
+* [Configure Security Provider](#configure-security-provider)
+* Create a directory for the vacation management (e.g., `/opt/urlaubsverwaltung`). Copy the .jar file there.
+* Create a configuration file named `application.properties` in that directory, which contains the configuration for
+the vacation management and overrides the default values.
+ The complete configuration options are documented under [Configuration](#configuration).
   
-Nach der [Konfiguration](#konfiguration) lässt sich die Urlaubsverwaltung starten.
+After [configuration](#configuration), the vacation management can be started.
 
 ```bash
 java -jar urlaubsverwaltung.jar
 ``` 
 
-Falls es Probleme beim Starten der Anwendung gibt, ist es hilfreich das [Logging der Anwendung](#logging-konfigurieren)
-zu konfigurieren, damit erhält man mehr Informationen über den Fehlerzustand.
+If there are problems starting the application, it is helpful to configure the [application's logging](#configure-logging)
+to get more information about the error state.
 
+#### Docker Variant
 
-#### Docker Variante
+All information about operating with our Docker image can be found in the [.example](.examples) folder.
 
-Alle Informationen zum Betrieb mit unserem Docker Image sind im Ordner [.example](.examples) zu finden.
+### Configuration
 
+The application has a [configuration file](https://github.com/urlaubsverwaltung/urlaubsverwaltung/blob/main/src/main/resources/application.properties) in the `src/main/resources` directory.
+This includes certain basic settings and default values. However, these alone are not sufficient for putting the
+application into production. Specific configurations such as the [database settings](#configure-database)
+and [Security Provider](#configure-security-provider) must be stored in their own configuration file.
 
-### Konfiguration
+The possibilities Spring Boot offers for using your own configuration file can be read in the
+['External Config' Reference](http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files).
 
-Die Anwendung besitzt im Verzeichnis `src/main/resources` eine [Konfigurationsdatei](https://github.com/urlaubsverwaltung/urlaubsverwaltung/blob/main/src/main/resources/application.properties).
-Diese beinhaltet gewisse Grundeinstellungen und Standardwerte. Diese allein reichen für die Produktivnahme der
-Anwendung allerdings nicht aus. Spezifische Konfigurationen wie z.B. die [Datenbank Einstellungen](#datenbank-konfigurieren)
-und [Security Provider](#security-provider-konfigurieren) müssen in einer eigenen Konfigurationsdatei hinterlegt werden.
+Below are all the specific configuration options of the vacation management system with their default values.
 
-Welche Möglichkeiten es bei Spring Boot gibt, damit die eigene Konfigurationsdatei genutzt wird, kann in der
-['External Config' Reference](http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files)
-nachgelesen werden.
-
-Nachstehend alle spezifischen Konfigurationsmöglichkeiten der Urlaubsverwaltung mit ihren Standartwerten.
 
 ```yaml
 uv:
@@ -166,20 +159,20 @@ uv:
 
 ```
 
-#### Security Provider konfigurieren
+#### Configure Security Provider
 
-Siehe die [Spring Boot oAuth2](https://docs.spring.io/spring-security/reference/servlet/oauth2/login/core.html#oauth2login-boot-property-mappings) konfiguration und für die Konfiguration des [Resource Servers via JWT](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html) z.B.
+See the [Spring Boot OAuth2](https://docs.spring.io/spring-security/reference/servlet/oauth2/login/core.html#oauth2login-boot-property-mappings) configuration and for configuring the [Resource Server via JWT](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html), for example.
 
-Zudem kann das Verhalten der Urlaubsverwaltung anhand von `uv.security.oidc` beeinflusst werden.
+Furthermore, the behavior of the vacation management can be influenced by `uv.security.oidc`.
 
-Es wird erwartet, dass der OIDC Provider im Access Token folgende Attribute enthält: `given_name`, `family_name`, `email`. Der client registration muss deshalb mit den Scopes `openid`,`profile` und `email` konfiguriert werden.
+It is expected that the OIDC Provider includes the following attributes in the Access Token: `given_name`, `family_name`, `email`. Therefore, the client registration must be configured with the scopes `openid`, `profile`, and `email`.
     
-Der erste Benutzer, welcher sich erfolgreich bei der Urlaubsverwaltung anmeldet, wird mit der Rolle `Office` angelegt. Dies ermöglicht Benutzer- und Rechteverwaltung und das Pflegen der Einstellungen innerhalb der Anwendung.
+The first user who successfully logs into the vacation management will be created with the `Office` role. This allows for user and rights management and maintaining the settings within the application.
 
-#### Datenbank konfigurieren
+#### Configure Database
 
-Die Anwendung verwendet zur Speicherung der Daten ein PostgreSQL-Datenbankmanagementsystem. 
-Erstelle in deinem PostgreSQL-Datenbankmanagementsystem eine Datenbank sowie einen Benutzer mit Zugriffsrechten für diese Datenbank und konfiguriere diese
+The application uses a PostgreSQL database management system for data storage. 
+Create a database and a user with access rights to this database in your PostgreSQL database management system and configure these
 
 ```yaml
 spring:
@@ -188,12 +181,11 @@ spring:
     username: $BENUTZER
     password: $PASSWORT
 ```
-Wenn Sie die Urlaubsverwaltung das erste Mal starten, werden automatisch alle Datenbanktabellen angelegt.
+When you start the vacation management for the first time, all database tables are created automatically.
 
+#### Configure E-mail Server
 
-#### E-Mail-Server konfigurieren
-
-Um den E-Mail-Server zu konfigurieren, müssen folgende Konfigurationen vorgenommen werden.
+To configure the e-mail server, the following configurations must be made.
 
 ```yaml
 uv:
@@ -211,18 +203,17 @@ spring:
     password: $PASSWORT
 ```
 
-Alle weiteren `spring.mail.*` Konfigurationen können in der [Spring Dokumentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#io.email)
-eingesehen werden.
+All other `spring.mail.*` configurations can be viewed in the [Spring Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#io.email).
 
-#### Benutzer-Synchronisation konfigurieren
+#### Configure User Synchronization
 
-Personen werden nicht mehr automatisch in die Urlaubsverwaltung synchronisiert,
-sondern nur noch beim Login der jeweiligen Person in der Urlaubsverwaltung angelegt.
+Persons are no longer automatically synchronized into the vacation management system,
+but are now created only when the respective person logs into the vacation management system.
 
-#### Logging konfigurieren
+#### Configure Logging
 
-Sollten beim Starten der Anwendung Probleme auftreten, lässt sich in der Konfigurationsdatei eine
-ausführliche Debug-Ausgabe konfigurieren, indem das `logging.level.*` pro Paket konfiguriert wird,
+If there are problems starting the application, a detailed debug output can be configured in the configuration file by setting the `logging.level.*` for each package,
+
 
 ```yaml
 logging:
@@ -231,32 +222,32 @@ logging:
     org.synyx.urlaubsverwaltung: TRACE
 ```
 
-sowie eine Logdatei
+as well as a log file.
 
 ```yaml
 logging.file.name: logs/urlaubsverwaltung.log
 ```
 
-geschrieben wird.
+as well as configuring a log file to be written.
 
 #### Info-Banner
 
-Es kann ein Info-Banner konfiguriert werden, um z. B. Wartungsarbeiten anzukündigen.
-Der Banner ist dann ganz oben zu sehen.
+An info banner can be configured, for example, to announce maintenance work.
+The banner will then be visible at the very top.
 
 ```properties
 uv.info-banner.enabled=true
-uv.info-banner.text.de=Wartungsarbeiten ab Freitag 14:00. Es kann zu Beeinträchtigungen kommen.
+uv.info-banner.text.de=Maintenance starting Friday at 2:00 PM. There may be disruptions.
 ```
 
 | Property                        | Type    | Description                                          |
 |---------------------------------|---------|------------------------------------------------------|
-| uv.info-banner.enabled          | Boolean | (default) `false`, `true` zum aktivieren des Banners |
-| uv.info-banner.text.de          | String  | Text des Info-Banners für das Deutsche Locale.       |
+| uv.info-banner.enabled          | Boolean | (default) `false`, `true` to activate the banner     |
+| uv.info-banner.text.de          | String  | Text of the info banner for the German locale.       |
 
 #### Launchpad
 
-Es kann ein Launchpad konfiguriert werden, welches einen Absprung zu anderen Anwendungen ermöglicht. 
+A launchpad can be configured, which allows jumping to other applications.
 
 ```yaml
 launchpad:
@@ -277,24 +268,25 @@ launchpad:
 
 | Property                        | Type     | Description                                                                                                                                                |
 |---------------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| launchpad.name-default-locale   | Locale   | Standard Name der Anwendung wenn für ein Locale keine Übersetzung gefunden wird.                                                                           |
-| launchpad.apps[x].url           | String   | URL der Anwendung.                                                                                                                                         |
-| launchpad.apps[x].name.[locale] | String   | Name der Anwendung für ein Locale.                                                                                                                         |
-| launchpad.apps[x].icon          | String   | URL eines Bildes oder ein base64 encodiertes Bild. Wird in das `<img src="" />` Attribut geschrieben.<br/>Das Bild sollte optimalerweise ein Quadrat sein. |
+| launchpad.name-default-locale   | Locale   | Default name of the application if no translation is found for a locale.                                                                                   |
+| launchpad.apps[x].url           | String   | URL of the application.                                                                                                                                    |
+| launchpad.apps[x].name.[locale] | String   | Name of the application for a locale.                                                                                                                      |
+| launchpad.apps[x].icon          | String   | URL of an image or a base64 encoded image. Will be written into the `<img src="" />` attribute.<br/>The image should ideally be square.                    |
 
-Das Launchpad hat eigene Übersetzungen. Spring muss entsprechend konfiguriert werden, damit die messages.properties gefunden wird:
+The launchpad has its own translations. Spring must be configured accordingly so that the messages.properties is found:
 
 ```yaml
 spring.messages.basename: messages,launchpad-core
 ```
 
-* **(required)** `messages` standardmäßige application messages properties
+* **(required)** `messages` default application message properties
 * **(required)** `launchpad-core` launchpad message properties
 
-### Anwendung als Service
+### Application as a Service
 
-Da die Anwendung auf Spring Boot basiert, lässt sie sich sehr komfortabel als Service installieren. Wie genau dies
-funktioniert, kann den entsprechenden Kapiteln der Spring Boot Dokumentation entnommen werden:
+Since the application is based on Spring Boot, it can be very comfortably installed as a service. The exact procedure
+can be found in the corresponding chapters of the Spring Boot documentation:
+
 
 * [Linux Service](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-service)
 * [Windows Service](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-windows)
@@ -302,47 +294,51 @@ funktioniert, kann den entsprechenden Kapiteln der Spring Boot Dokumentation ent
 
 ---
   
-## Demodaten-Modus
+## Demo Data Mode
 
-### Starten der Anwendung im Demodaten-Modus
+### Starting the Application in Demo Data Mode
 
-Um die Anwendung möglichst schnell lokal ausprobieren zu können, bietet es sich an
-die Datenbank via [Docker Compose](https://docs.docker.com/compose/overview/) zu starten:
+To be able to try out the application locally as quickly as possible, it is advisable
+to start the database via [Docker Compose](https://docs.docker.com/compose/overview/):
+
 
 ```bash
 docker-compose up
 ```
 
-und die Anwendung mit dem Profil `demodata` zu starten:
+and to start the application with the `demodata` profile:
+
 
 ```bash
 java -jar -Dspring.profiles.active=demodata urlaubsverwaltung.jar
 ```
 
-Auf diese Weise wird die Anwendung mit einer PostgreSQL-Datenbankmanagementsystem gestartet und Demodaten generiert.
+In this way, the application is started with a PostgreSQL database management system and demo data is generated.
 
-Die Demodaten enthalten folgende **Benutzer**, ein Passwort wird nicht benötigt:
+The demo data includes the following **users**, a password is not required:
 
-| Benutzername                                 | Passwort | Rolle                            |
-|----------------------------------------------|----------|----------------------------------|
-| user@urlaubsverwaltung.cloud                 | secret   | User                             |
-| departmentHead@urlaubsverwaltung.cloud       | secret   | User & Abteilungsleiter          |
-| secondStageAuthority@urlaubsverwaltung.cloud | secret   | User & Freigabe-Verantwortlicher |
-| boss@urlaubsverwaltung.cloud                 | secret   | User & Chef                      |
-| office@urlaubsverwaltung.cloud               | secret   | User & Office                    |
-| admin@urlaubsverwaltung.cloud                | secret   | User & Admin                     |
+| Username                                      | Password | Role                            |
+|-----------------------------------------------|----------|----------------------------------|
+| user@urlaubsverwaltung.cloud                  | secret   | User                             |
+| departmentHead@urlaubsverwaltung.cloud        | secret   | User & Department Head           |
+| secondStageAuthority@urlaubsverwaltung.cloud  | secret   | User & Release Responsible       |
+| boss@urlaubsverwaltung.cloud                  | secret   | User & Boss                      |
+| office@urlaubsverwaltung.cloud                | secret   | User & Office                    |
+| admin@urlaubsverwaltung.cloud                 | secret   | User & Admin                     |
 
-Möchte man, dass beim Starten der Anwendung keine Demodaten generiert werden, muss die Konfiguration
+
+If you do not want demo data to be generated when the application starts, the configuration must be
+
 
 `uv.development.demodata.create`
 
-in den [application-demodata.properties](https://github.com/urlaubsverwaltung/urlaubsverwaltung/blob/main/src/main/resources/application-demodata.properties)
-auf `false` gesetzt werden.
+in the [application-demodata.properties](https://github.com/urlaubsverwaltung/urlaubsverwaltung/blob/main/src/main/resources/application-demodata.properties)
+set to `false`.
 
+### Accessing the Application
 
-### Aufrufen der Anwendung
+The following systems are accessible via `localhost`
 
-Folgende Systeme sind erreichbar unter `localhost`
 
 | Service                                    | Port |
 |--------------------------------------------|------|
@@ -352,13 +348,13 @@ Folgende Systeme sind erreichbar unter `localhost`
   
 ---
   
-## Entwicklung
+## Development
 
-Wenn du uns bei der **Entwicklung** der Urlaubsverwaltung **unterstützen** möchtest,
-dann schau dir die [Contributing to Urlaubsverwaltung](./CONTRIBUTING.md) Referenz und die folgenden
-Abschnitte an. Bei Fragen kannst du gerne [ein neue Q&A](https://github.com/urlaubsverwaltung/urlaubsverwaltung/discussions/new?category=q-a) erstellen.
+If you would like to **support** us in the **development** of the vacation management system,
+please take a look at the [Contributing to Urlaubsverwaltung](./CONTRIBUTING.md) reference and the following
+sections. If you have any questions, feel free to [create a new Q&A](https://github.com/urlaubsverwaltung/urlaubsverwaltung/discussions/new?category=q-a).
 
-### Voraussetzungen
+### Prerequisites
 
 * [JDK 21](https://adoptium.net)
 * [Docker 20.10.+](https://docs.docker.com/get-docker/)
@@ -367,13 +363,13 @@ Abschnitte an. Bei Fragen kannst du gerne [ein neue Q&A](https://github.com/urla
 
 ### Repository clonen
 
-Ohne GitHub Account
+Without GitHub Account
 
 ```bash
 https://github.com/urlaubsverwaltung/urlaubsverwaltung.git
 ```
 
-mit GitHub Account
+With GitHub Account
 
 ```bash
 git clone git@github.com:urlaubsverwaltung/urlaubsverwaltung.git
@@ -381,76 +377,80 @@ git clone git@github.com:urlaubsverwaltung/urlaubsverwaltung.git
 
 ### git hooks (optional)
 
-Zum Automatisieren verschiedener Dinge bietet dir das Projekt [git hooks](https://git-scm.com/book/uz/v2/Customizing-Git-Git-Hooks)
-an. Diese kannst du mit folgendem Befehl installieren:
+To automate various tasks, the project offers [git hooks](https://git-scm.com/book/uz/v2/Customizing-Git-Git-Hooks).
+You can install them with the following command:
+
 
 ```bash
 git config core.hooksPath '.githooks'
 ```
 
-Die Git-Hooks sind im [.githooks](./.githooks/) Verzeichnis zu finden.
+The Git hooks can be found in the [.githooks](./.githooks/) directory.
 
-### Anwendung starten
 
-Die Urlaubsverwaltung ist eine [Spring Boot](http://projects.spring.io/spring-boot/) Anwendung und kann mit dem Maven
-Plugin gestartet werden. Alle Abhängigkeiten, wie die Datenbank oder der Mail-Server werden automatisch gestartet.
-Es bietet sich an, die Anwendung mit dem Profil `demodata` zu starten, um Testdaten generieren
-zu lassen:
+### Starting the Application
+
+The vacation management system is a [Spring Boot](http://projects.spring.io/spring-boot/) application and can be started with the Maven
+plugin. All dependencies, such as the database or the mail server, are started automatically.
+It is advisable to start the application with the `demodata` profile to generate
+test data:
+
 
 ```bash
 ./mvnw clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dspring.profiles.active=demodata"
 ```
 
-bzw. für Windows Benutzer über:
+or for Windows users via:
 
 ```bash
 ./mvnw.cmd clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dspring.profiles.active=demodata"
 ```
 
-### Anwendung nutzen
+### Using the Application
 
-Im Browser lässt sich die Anwendung dann über [http://localhost:8080/](http://localhost:8080/) ansteuern.
+The application can then be accessed in the browser via [http://localhost:8080/](http://localhost:8080/).
 
-Mit dem `demodata` Profil wird eine PostgreSQL-Datenbank verwendet und es werden Demodaten angelegt,
-d.h. Benutzer, Urlaubsanträge und Krankmeldungen. Daher kann man sich in der Weboberfläche nun mit verschiedenen
-[Demodaten-Benutzer](#demodaten-benutzer) anmelden.
+With the `demodata` profile, a PostgreSQL database is used and demo data is created,
+i.e., users, vacation requests, and sick notes. Therefore, you can now log in to the web interface with various
+[demo data users](#demo-data-users).
 
 
-### Frontend Entwicklung
+### Frontend Development
 
-Die 'User Experience' einiger Seiten wird zur Laufzeit mit JavaScript weiter verbessert.
+The 'User Experience' of some pages is further enhanced at runtime with JavaScript.
 
-Assets sind in `<root>/src/main/javascript` zu finden
+Assets can be found in `<root>/src/main/javascript`
 
-* `bundles` sind in den HTML-Seiten zu integrieren
-* `components` sind einzelne Komponenten zur Wiederverwendung wie z. B. der _datepicker_
-* `js` beinhaltet seitenspezifische Dinge
-* `lib` sind third-party Bibliotheken
+* `bundles` are to be integrated into HTML pages
+* `components` are individual components for reuse, such as the _datepicker_
+* `js` includes page-specific things
+* `lib` are third-party libraries
 
-Der Frontend Build ist in Maven integriert. Isoliert können die Assets aber auch auf der Kommandozeile gebaut werden.
+The frontend build is integrated into Maven. However, the assets can also be built on the command line in isolation.
 
 * `npm run build`
-  * baut optimierte, minifizierte Assets
-  * Info: der Dateiname beinhaltet einen Hash welcher eindeutig zum Inhalt des Assets passt 
+  * builds optimized, minified assets
+  * Note: the filename contains a hash that uniquely matches the content of the asset
 * `npm run build:dev`
-  * baut nicht minifizierte Assets
+  * builds unminified assets
 * `npm run build:watch`
-  * baut automatisch nach dem Editieren von JavaScript / CSS Dateien neue Assets
+  * automatically builds new assets after editing JavaScript / CSS files
 
-#### Long term caching von Assets
 
-Startet man den Maven Build oder baut man die Assets mit dem NPM Task `npm run build` wird eine JSON Datei `assets-manifest.json` angelegt.
-Das Manifest beschreibt ein Mapping der bundles zum generierten Dateinamen inklusive Hash. Dieser gemappte Dateiname muss
-in den Html-Seiten integriert werden. Damit das nicht bei jeder Änderung manuell gemacht werden muss, kann der Dateiname mit Hilfe der
-Taglib `AssetsHashResolverTag.java` zur Kompilierungszeit automatisiert werden.
+#### Long Term Caching of Assets
+
+When you start the Maven build or build the assets with the NPM task `npm run build`, a JSON file `assets-manifest.json` is created.
+The manifest describes a mapping of the bundles to the generated filename including the hash. This mapped filename must
+be integrated into the HTML pages. To avoid having to do this manually with every change, the filename can be automated at compile time using the
+`AssetsHashResolverTag.java` tag library.
 
 ```html
 <script defer asset:src="npm.jquery.js"></script>
 ```
 
-Während der Weiterentwicklung ist es sinnvoll das Caching zu deaktivieren. Wird das `demodata` Profil verwendet muss
-nichts weiter getan werden. Verwendest du das Profil nicht, kannst du das Caching mit folgenden application Properties
-deaktivieren:
+During further development, it makes sense to disable caching. If the `demodata` profile is used,
+nothing else needs to be done. If you are not using that profile, you can disable caching with the following application properties:
+
 
 ```yaml
 spring:
@@ -468,28 +468,30 @@ spring:
 
 #### Icons
 
-Wir nutzen das großartige Lucide Icon Set. Vielen Dank! ♥️
+We use the amazing Lucide icon set. Thank you! ♥️
+
 
 - https://lucide.dev
 - https://github.com/lucide-icons/lucide
 
 ### API
 
-Die Urlaubsverwaltung verfügt über eine API, die unter [http://localhost:8080/api](http://localhost:8080/api) erreichbar ist.
+The vacation management system has an API accessible at [http://localhost:8080/api](http://localhost:8080/api).
 
-### UI Tests mit Playwright
+### UI Tests with Playwright
 
-Im [test ui](src/test/java/org/synyx/urlaubsverwaltung/ui) Package befinden sich UI Tests. Diese testen einige
-End to End Anwendungsfälle wie z. B. in den Einstellungen etwas aktivieren/deaktivieren und dessen Auswirkungen.
+The [test ui](src/test/java/org/synyx/urlaubsverwaltung/ui) package contains UI tests. These tests cover some end-to-end application cases such as enabling/disabling something in the settings and its effects.
 
-Als Testrunner und auch Assertion Lib wird [Playwright-Java](https://playwright.dev/java/) verwendet.  
-Details siehe [Playwright for Java Getting Started](https://playwright.dev/java/docs/intro). 
+[Playwright-Java](https://playwright.dev/java/) is used as the test runner and assertion library.
+Details can be found in [Playwright for Java Getting Started](https://playwright.dev/java/docs/intro).
+
 
 #### Headless Browser
 
-Die Tests laufen standardmäßig ohne sichtbaren Browser (headless).
-Das kann im [PageParameterResolver](src/test/java/org/synyx/urlaubsverwaltung/ui/extension/PageParameterResolver.java)
-mit `BrowserType.LaunchOptions` entsprechend konfiguriert werden.  
+The tests run by default without a visible browser (headless).
+This can be configured accordingly in the [PageParameterResolver](src/test/java/org/synyx/urlaubsverwaltung/ui/extension/PageParameterResolver.java)
+with `BrowserType.LaunchOptions`.
+
 
 ```java
 final Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
@@ -497,10 +499,10 @@ final Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptio
 
 #### Debugging
 
-Playwright bietet einen eigenen Inspector an. Siehe [Playwright Debugging Tests](https://playwright.dev/java/docs/debug)
-für weitere Informationen.
+Playwright provides its own inspector. See [Playwright Debugging Tests](https://playwright.dev/java/docs/debug)
+for more information.
 
-Um diesen zu nutzen, muss beim Starten des Tests die Umgebungsvariable `PWDEBUG=1` gesetzt werden.
+To use it, the environment variable `PWDEBUG=1` must be set when starting the tests.
 
 ### Release
 
@@ -520,3 +522,4 @@ Go to the GitHub action with the name [release trigger][github-action-release-tr
 [Migration-Guide-v5]: https://github.com/urlaubsverwaltung/urlaubsverwaltung/wiki/Urlaubsverwaltung-5.0-Migration-Guide "Migration Guide v5"
 [github-action-release-trigger]: https://github.com/urlaubsverwaltung/urlaubsverwaltung/actions/workflows/release-trigger.yml "Release Trigger"
 [PostgreSQL]: https://www.postgresql.org/ "PostgreSQL"
+
