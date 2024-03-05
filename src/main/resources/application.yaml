@@ -47,7 +47,11 @@ server:
   compression:
     min-response-size: 1024
     enabled: true
-
+  forward-headers-strategy: native
+  tomcat:
+    remoteip:
+      port-header: X-Forwarded-Port
+      protocol-header: X-Forwarded-Proto
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true

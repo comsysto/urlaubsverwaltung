@@ -11,6 +11,7 @@ import { Duration } from "aws-cdk-lib";
 
 import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
+import { Repository } from "aws-cdk-lib/aws-ecr";
 
 interface TeamgeistProps extends StackProps {
   vpc: ec2.Vpc;
@@ -39,6 +40,7 @@ export class TeamgeistStack extends Stack {
       vpc,
       internetFacing: true,
       vpcSubnets: { subnets: vpc.publicSubnets },
+  
     });
 
     const httpsListener = lb.addListener("HttpsListener", {
@@ -50,9 +52,10 @@ export class TeamgeistStack extends Stack {
     const teamgeistTaskDef = new ecs.FargateTaskDefinition(this, "TeamgeistTask", {
       memoryLimitMiB: 2048,
       cpu: 1024,
+      
     });
     teamgeistTaskDef.addContainer("TeamgeistContainer", {
-      image: ecs.ContainerImage.fromRegistry("docker.io/urlaubsverwaltung/urlaubsverwaltung:5.0.2"),
+      image: ecs.ContainerImage.fromEcrRepository(Repository.fromRepositoryName(this, "teamgeist2", "teamgeist2"), "latest"),
       environment: {
         SERVER_PORT: "8080",
         SPRING_DATASOURCE_URL: `jdbc:postgresql://${db.instanceEndpoint.hostname}:5432/teamgeist2`,
@@ -80,6 +83,7 @@ export class TeamgeistStack extends Stack {
       },
       portMappings: [{ containerPort: 8080 }],
       logging: new ecs.AwsLogDriver({ streamPrefix: "Teamgeist" }),
+  
     });
 
     const teamgeistSg = new ec2.SecurityGroup(this, "TeamgeistSg", {
@@ -99,6 +103,7 @@ export class TeamgeistStack extends Stack {
         name: "teamgeist",
         cloudMapNamespace: namespace,
       },
+      enableExecuteCommand: true
     })
 
     teamgeistService.connections.addSecurityGroup(teamgeistSg);

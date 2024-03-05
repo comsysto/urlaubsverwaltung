@@ -7,6 +7,10 @@ COPY . /app
 RUN mvn clean package
 
 FROM alpine:latest 
+
+RUN apk update && \
+    apk add tcpdump
+
 ENV JAVA_HOME /opt/jdk/jdk-21.0.1
 ENV PATH $JAVA_HOME/bin:$PATH
 
