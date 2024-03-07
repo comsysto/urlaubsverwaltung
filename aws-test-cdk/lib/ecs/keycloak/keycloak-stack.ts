@@ -42,7 +42,7 @@ export class KeycloakStack extends Stack {
       vpcSubnets: { subnets: vpc.publicSubnets },
     });
 
-    const httpsListener = lb.addListener("HttpesListener", {
+    const httpsListener = lb.addListener("HttpsListener", {
       port: 443,
       open: true,
       certificates: [certificate],
