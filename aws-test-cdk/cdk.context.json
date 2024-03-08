@@ -145,5 +145,49 @@
   "security-group:account=169119119606:region=eu-north-1:securityGroupName=KeycloakStack-teamgeist2testlbSecurityGroupA955AB91-1RWAJEKNMC38W:vpcId=vpc-0ec01250ee0210b5c": {
     "securityGroupId": "sg-07b8b0489ad74347e",
     "allowAllOutbound": false
+  },
+  "vpc-provider:account=169119119606:filter.vpc-id=vpc-0d0690c3f1817e11c:region=eu-north-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0d0690c3f1817e11c",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "169119119606",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "PrivateSubnet",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-00868d42f0d9a4f18",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-0db3df972827bc850"
+          },
+          {
+            "subnetId": "subnet-0a54a856c57308888",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "eu-north-1b",
+            "routeTableId": "rtb-07460fcab22a29b39"
+          }
+        ]
+      },
+      {
+        "name": "PublicSubnet",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-06696ff601eaff5eb",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "eu-north-1a",
+            "routeTableId": "rtb-0763a3ecb6259f429"
+          },
+          {
+            "subnetId": "subnet-0817fb67cbfc1b5ad",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "eu-north-1b",
+            "routeTableId": "rtb-029185f54a382b5e4"
+          }
+        ]
+      }
+    ]
   }
 }

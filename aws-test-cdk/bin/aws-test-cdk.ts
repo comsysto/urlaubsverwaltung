@@ -15,13 +15,14 @@ const VpcStc = new VpcStack(app, 'VpcStack', { env: env});
 const dbStc = new DatabaseStack(app, 'DatabaseStack', {
   env: env,
 });
-const kc = new KeycloakStack(app, 'KeycloakStack', {
+new KeycloakStack(app, 'KeycloakStack', {
   vpc: VpcStc.vpc,
+  privateDnsNamespace: VpcStc.privateNamespace,
   env: env,
 });
 new TeamgeistStack(app, "TeamgeistStack", {
   vpc: VpcStc.vpc,
   db: dbStc.psqlInstance,
-  namespace: kc.dnsNamespace,
+  privateDnsNamespace: VpcStc.privateNamespace,
   env: env,
 })

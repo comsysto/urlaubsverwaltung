@@ -26,7 +26,7 @@ export class DatabaseStack extends Stack {
       },
     });
 
-    const VPC = ec2.Vpc.fromLookup(this, "VpcStack/teamgeist2-test-vpc", { vpcId: "vpc-0ec01250ee0210b5c" });
+    const VPC = ec2.Vpc.fromLookup(this, "VpcStack/teamgeist2-test-vpc", { vpcId: "vpc-0d0690c3f1817e11c" });
 
     const dbSg = new ec2.SecurityGroup(this, "Database-SG", {
       securityGroupName: "Database-SG",
@@ -41,7 +41,7 @@ export class DatabaseStack extends Stack {
 
     this.psqlInstance = new rds.DatabaseInstance(this, "DB-1", {
       vpc: VPC,
-      vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
+      vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
       instanceType,
       engine,
       port,
